@@ -41,9 +41,12 @@ def get_duration(visit):
 
 
 def format_duration(duration):
+    seconds_in_hour = 3600
+    seconds_in_minute = 60
+
     total_seconds = int(duration.total_seconds())
-    hours = total_seconds // 3600
-    minutes = (total_seconds - hours * 3600) // 60
+    hours = total_seconds // seconds_in_hour
+    minutes = (total_seconds - hours * seconds_in_hour) // seconds_in_minute
     return f'{hours}:{minutes}'
 
 
