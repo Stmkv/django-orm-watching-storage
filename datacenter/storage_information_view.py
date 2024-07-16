@@ -9,10 +9,10 @@ locale.setlocale(locale.LC_ALL, "ru_RU.UTF-8")
 
 
 def storage_information_view(request):
-    visits_with_leaved_at = Visit.objects.filter(leaved_at__isnull=True)
+    visits_without_leave = Visit.objects.filter(leaved_at__isnull=True)
 
     non_closed_visits = []
-    for visit in visits_with_leaved_at:
+    for visit in visits_without_leave:
         duration = get_duration(visit)
         duration_str = format_duration(duration)
         non_closed_visit = {
