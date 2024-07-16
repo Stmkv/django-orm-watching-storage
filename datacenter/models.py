@@ -1,4 +1,7 @@
 from django.db import models
+from time import localtime
+from django.utils import timezone
+from datetime import timedelta
 
 
 class Passcard(models.Model):
@@ -28,3 +31,21 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
+
+
+def get_duration(visit):
+    if visit.leaved_at:
+        return visit.leaved_at - visit.entered_at
+    else:
+        return timezone.localtime() - visit.entered_at
+
+
+def format_duration(duration):
+    total_seconds = int(duration.total_seconds())
+    hours = total_seconds // 3600
+    minutes = (total_seconds - hours * 3600) // 60
+    return f'{hours}:{minutes}'
+
+
+def is_strange(visit, threshold_minutes=60):
+    return get_duration(visit) > timedelta(minutes=threshold_minutes)
