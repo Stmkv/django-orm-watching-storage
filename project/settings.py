@@ -16,7 +16,7 @@ DATABASES = {
     }
 }
 
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.bool('DEBUG', default=False)
 
 INSTALLED_APPS = ['datacenter']
 
